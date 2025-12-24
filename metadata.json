@@ -1,0 +1,5 @@
+{
+  "name": "ClientPay Tracker",
+  "description": "Une application SaaS minimaliste pour freelances permettant de suivre les clients, gérer les paiements et automatiser les relances.",
+  "requestFramePermissions": []
+}
