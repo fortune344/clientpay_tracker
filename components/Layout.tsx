@@ -23,9 +23,9 @@ export const Layout: React.FC<LayoutProps> = ({
   const { user, profile, isPremium, signOut } = useAuth();
 
   const navItems = [
-    { id: 'DASHBOARD' as View, label: 'Tableau de bord', icon: LayoutDashboard },
+    { id: 'DASHBOARD' as View, label: 'Dashboard', icon: LayoutDashboard },
     { id: 'CLIENTS' as View, label: 'Clients', icon: Users },
-    { id: 'PAYMENTS' as View, label: 'Paiements', icon: CreditCard },
+    { id: 'PAYMENTS' as View, label: 'Payments', icon: CreditCard },
   ];
 
   return (
@@ -104,7 +104,7 @@ export const Layout: React.FC<LayoutProps> = ({
               {user?.email?.substring(0, 2).toUpperCase()}
             </div>
             <div className="overflow-hidden">
-              <p className="text-sm font-medium text-slate-900 truncate">{profile?.full_name || 'User'}</p>
+              <p className="text-sm font-medium text-slate-900 truncate">{profile?.full_name || user?.email?.split('@')[0] || 'User'}</p>
               <p className="text-xs text-slate-500 truncate">{user?.email}</p>
             </div>
           </div>
@@ -113,7 +113,7 @@ export const Layout: React.FC<LayoutProps> = ({
             className="w-full flex items-center gap-2 text-slate-500 hover:text-red-600 px-2 py-1 text-sm transition-colors"
           >
             <LogOut size={16} />
-            Se déconnecter
+            Sign Out
           </button>
         </div>
       </aside>

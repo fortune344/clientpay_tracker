@@ -124,7 +124,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ clients, payments 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold text-slate-800 md:hidden">Tableau de bord</h2>
+        <h2 className="text-2xl font-bold text-slate-800 mb-6">Dashboard</h2>
         <h2 className="text-xl font-bold text-slate-800 md:hidden">Dashboard</h2>
 
       </div>

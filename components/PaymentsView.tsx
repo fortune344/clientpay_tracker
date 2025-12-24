@@ -70,11 +70,11 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
   const getStatusBadge = (status: PaymentStatus) => {
     switch (status) {
       case PaymentStatus.PAID:
-        return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"><CheckCircle2 size={12} className="mr-1" /> Payé</span>;
+        return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"><CheckCircle2 size={12} className="mr-1" /> Paid</span>;
       case PaymentStatus.PENDING:
-        return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"><Clock size={12} className="mr-1" /> En attente</span>;
+        return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"><Clock size={12} className="mr-1" /> Pending</span>;
       case PaymentStatus.OVERDUE:
-        return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"><AlertCircle size={12} className="mr-1" /> En retard</span>;
+        return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"><AlertCircle size={12} className="mr-1" /> Overdue</span>;
     }
   };
 
@@ -119,7 +119,7 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
 
     } catch (error) {
       console.error("Veo Error:", error);
-      alert("Erreur lors de la génération de la vidéo. Vérifiez votre compte de facturation.");
+      alert("Error generating video. Check your billing account.");
     } finally {
       setGeneratingVideoId(null);
     }
@@ -150,7 +150,7 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
 
   const handleExportCSV = () => {
     if (!isPremium) {
-      showToast("Fonctionnalité Premium 💎. Exportez vos données avec la version Pro.", "error");
+      showToast("Premium Feature 💎. Export your data with the Pro version.", "error");
       return;
     }
     const headers = ['Description', 'Client', 'Montant', 'Devise', 'Date', 'Statut'];
@@ -181,13 +181,13 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
 
   const handleExportPDF = () => {
     if (!isPremium) {
-      showToast("Fonctionnalité Premium 💎. Générez des rapports PDF avec la version Pro.", "error");
+      showToast("Premium Feature 💎. Generate PDF reports with the Pro version.", "error");
       return;
     }
     const doc = new jsPDF();
 
     doc.setFontSize(18);
-    doc.text("Rapport des Paiements - ClientPay", 14, 22);
+    doc.text("Payments Report - ClientPay", 14, 22);
     doc.setFontSize(11);
     doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 30);
 
@@ -223,25 +223,25 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
             onClick={() => setFilter('ALL')}
             className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${filter === 'ALL' ? 'bg-slate-800 text-white' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'}`}
           >
-            Tous
+            All
           </button>
           <button
             onClick={() => setFilter(PaymentStatus.PAID)}
             className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${filter === PaymentStatus.PAID ? 'bg-green-600 text-white' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'}`}
           >
-            Payés
+            Paid
           </button>
           <button
             onClick={() => setFilter(PaymentStatus.PENDING)}
             className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${filter === PaymentStatus.PENDING ? 'bg-yellow-500 text-white' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'}`}
           >
-            En attente
+            Pending
           </button>
           <button
             onClick={() => setFilter(PaymentStatus.OVERDUE)}
             className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${filter === PaymentStatus.OVERDUE ? 'bg-red-600 text-white' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'}`}
           >
-            En retard
+            Overdue
           </button>
         </div>
 
@@ -249,14 +249,14 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
           <div className="relative group">
             <button className="flex items-center gap-2 bg-white text-slate-700 px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors font-medium">
               <Download size={20} />
-              <span className="hidden sm:inline">Exporter</span>
+              <span className="hidden sm:inline">Export</span>
             </button>
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-100 p-1 hidden group-hover:block z-20">
               <button onClick={handleExportCSV} className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 rounded-lg">
                 <FileText size={16} /> CSV (Excel)
               </button>
               <button onClick={handleExportPDF} className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 rounded-lg">
-                <FileText size={16} className="text-red-500" /> PDF (Rapport)
+                <FileText size={16} className="text-red-500" /> PDF (Report)
               </button>
             </div>
           </div>
@@ -266,7 +266,7 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
             className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-medium transition-colors shadow-sm shadow-indigo-200"
           >
             <Plus size={20} />
-            <span className="hidden sm:inline">Facture</span>
+            <span className="hidden sm:inline">Invoice</span>
             <span className="sm:hidden">+</span>
           </button>
         </div>
@@ -280,9 +280,9 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
               <tr>
                 <th className="px-6 py-4 font-semibold text-slate-600 text-sm">Description</th>
                 <th className="px-6 py-4 font-semibold text-slate-600 text-sm">Client</th>
-                <th className="px-6 py-4 font-semibold text-slate-600 text-sm">Montant</th>
-                <th className="px-6 py-4 font-semibold text-slate-600 text-sm">Échéance</th>
-                <th className="px-6 py-4 font-semibold text-slate-600 text-sm">Statut</th>
+                <th className="px-6 py-4 font-semibold text-slate-600 text-sm">Amount</th>
+                <th className="px-6 py-4 font-semibold text-slate-600 text-sm">Due Date</th>
+                <th className="px-6 py-4 font-semibold text-slate-600 text-sm">Status</th>
                 <th className="px-6 py-4 font-semibold text-slate-600 text-sm text-right">Actions</th>
               </tr>
             </thead>
@@ -480,7 +480,7 @@ export const PaymentsView: React.FC<PaymentsViewProps> = ({
                   type="submit"
                   className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium"
                 >
-                  Créer Facture
+                  Create Invoice
                 </button>
               </div>
             </form>

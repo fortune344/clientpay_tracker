@@ -3,7 +3,7 @@ import { Layout } from './components/Layout';
 import { DashboardView } from './components/DashboardView';
 import { ClientsView } from './components/ClientsView';
 import { PaymentsView } from './components/PaymentsView';
-import { LandingView } from './components/LandingView';
+
 import { AuthView } from './components/AuthView';
 import { UpgradeView } from './components/UpgradeView';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
@@ -273,15 +273,12 @@ const AppContent: React.FC = () => {
 
   if (authLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
 
-  // Flow: Landing -> Auth -> App
-  if (!hasStarted) {
-    return <LandingView onStart={handleStart} />;
-  }
-
-  const overdueCount = payments.filter(p => p.status === PaymentStatus.OVERDUE).length;
-
+  // Always show LandingPage if not logged in and not explicitly seeking auth
   if (showLanding && !user) {
-    return <LandingPage onLogin={() => setShowLanding(false)} onSignup={() => setShowLanding(false)} />;
+    return <LandingPage onLogin={() => setShowLanding(false)} onSignup={() => {
+      handleStart(); // Keep tracking start if needed, or remove
+      setShowLanding(false);
+    }} />;
   }
 
   if (!user) {
